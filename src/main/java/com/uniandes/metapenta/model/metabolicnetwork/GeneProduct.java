@@ -1,9 +1,15 @@
 package com.uniandes.metapenta.model.metabolicnetwork;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Represents a gene product (usually an enzyme) that participates in one reaction
  * @author Jorge Duitama
  */
+
+@Getter
+@Setter
 public class GeneProduct implements Comparable<GeneProduct>{
 	private String id;
 	private String name;
@@ -19,31 +25,7 @@ public class GeneProduct implements Comparable<GeneProduct>{
 		this.id = id;
 		this.name = name;
 	}
-	/**
-	 * @return String product id
-	 */
-	public String getId() {
-		return id;
-	}
-	/**
-	 * @return String product name
-	 */
-	public String getName() {
-		return name;
-	}
-	/**
-	 * @return String product label
-	 */
-	public String getLabel() {
-		return label;
-	}
-	/**
-	 * Changes the label
-	 * @param label new product label
-	 */
-	public void setLabel(String label) {
-		this.label = label;
-	}
+
 	@Override
 	public int compareTo(GeneProduct o) {	
 		return this.id.compareTo(o.id);

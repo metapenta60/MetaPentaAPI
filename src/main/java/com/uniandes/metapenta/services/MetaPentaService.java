@@ -1,4 +1,4 @@
-package com.uniandes.metapenta.service;
+package com.uniandes.metapenta.services;
 
 import com.uniandes.metapenta.io.MetabolicNetworkXMLLoader;
 import com.uniandes.metapenta.model.metabolicnetwork.MetabolicNetwork;

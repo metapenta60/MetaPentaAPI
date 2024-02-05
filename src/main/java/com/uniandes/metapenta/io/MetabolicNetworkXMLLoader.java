@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Loads a metabolic network froman XML file
+ * Loads a metabolic network from an XML file
  * @author Jorge Duitama
  */
 @Component

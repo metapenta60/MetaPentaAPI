@@ -2,8 +2,10 @@ package com.uniandes.metapenta.model.metabolicnetwork;
 
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class Metabolite {
 	private String id;
 	private String name;
@@ -11,29 +13,10 @@ public class Metabolite {
 	private String chemicalFormula;	
 
 	public Metabolite(String id, String name, String compartment) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.compartment = compartment;
 	}
-	public String getChemicalFormula() {
-		return chemicalFormula;
-	}
 
-	public void setChemicalFormula(String chemicalFormula) {
-		this.chemicalFormula = chemicalFormula;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getCompartment() {
-		return compartment;
-	}
 
 }
