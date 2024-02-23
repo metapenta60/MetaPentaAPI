@@ -38,12 +38,12 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.metapenta</groupId>
-			<artifactId>metapenta</artifactId>
-			<version>5.0-SNAPSHOT</version>
+			<groupId>uniandes.flag.metapenta.edu.co</groupId>
+			<artifactId>metapentacore</artifactId>
+			<version>1.0.4</version>
 		</dependency>
+		
 	</dependencies>
-
 
 	<repositories>
 		<repository>
@@ -51,10 +51,6 @@
 			<url>https://maven.pkg.github.com/metapenta60/MetaPentaCore/org/metapenta/metapenta</url>
 		</repository>
 	</repositories>
-
-
-
-
 
 	<build>
 		<plugins>

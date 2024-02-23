@@ -1,30 +1,35 @@
 package com.uniandes.metapenta.service;
 
-import com.uniandes.metapenta.io.MetabolicNetworkXMLLoader;
-import com.uniandes.metapenta.model.metabolicnetwork.MetabolicNetwork;
-import com.uniandes.metapenta.model.metabolicnetwork.Metabolite;
-import com.uniandes.metapenta.model.metabolicnetwork.Reaction;
-import com.uniandes.metapenta.model.metabolicnetwork.ReactionComponent;
-import com.uniandes.metapenta.model.petrinet.Edge;
-import com.uniandes.metapenta.model.petrinet.PetriNet;
-import com.uniandes.metapenta.model.petrinet.Place;
-import com.uniandes.metapenta.model.petrinet.Transition;
-import org.springframework.beans.factory.annotation.Autowired;
+import metapenta.tools.io.loaders.MetabolicNetworkXMLLoader;
+import metapenta.model.MetabolicNetwork;
+import metapenta.model.metabolic.network.*;
+import metapenta.model.petrinet.Edge;
+import metapenta.model.petrinet.PetriNet;
+import metapenta.model.petrinet.Place;
+import metapenta.model.petrinet.Transition;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class MetaPentaService {
-    @Autowired
+
+
     private MetabolicNetworkXMLLoader loader;
 
 
-
-    @Autowired
     private PetriNet petriNet;
+
+    public MetaPentaService( ){
+        MetabolicNetworkXMLLoader loader = new MetabolicNetworkXMLLoader();
+        PetriNet petriNet = new PetriNet();
+        this.loader = loader;
+        this.petriNet = petriNet;
+    }
+
+
+
     public PetriNet getPetriNet(String model){
         loadPetriNet(model);
         return petriNet;
@@ -34,7 +39,7 @@ public class MetaPentaService {
         try {
             MetabolicNetwork network = loader.loadNetwork(model);
             loadPetriNet(network);
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
