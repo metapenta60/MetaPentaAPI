@@ -12,9 +12,10 @@ https://docs.github.com/en/packages/working-with-a-github-packages-registry/work
    
 5. ejecutar:
 > mvn deploy
+
 > mvn install
 
-Entrar al siguiente enlace:
+
 
 
 
