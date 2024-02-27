@@ -10,7 +10,6 @@
 	</parent>
 	<groupId>com.uniandes</groupId>
 	<artifactId>metapenta</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>metapenta</name>
 	<description>MetaPeNTA</description>
 	<properties>
@@ -40,17 +39,9 @@
 		<dependency>
 			<groupId>uniandes.flag.metapenta.edu.co</groupId>
 			<artifactId>metapentacore</artifactId>
-			<version>1.0.4</version>
+			<version>1.0.5</version>
 		</dependency>
-		
 	</dependencies>
-
-	<repositories>
-		<repository>
-			<id>metapenta</id>
-			<url>https://maven.pkg.github.com/metapenta60/MetaPentaCore/org/metapenta/metapenta</url>
-		</repository>
-	</repositories>
 
 	<build>
 		<plugins>
