@@ -23,22 +23,26 @@ public class MetabolicNetworkDTO {
 
     private List<MetaboliteDTO> metabolites = new ArrayList<>();
 
-    public MetabolicNetworkDTO(MetabolicNetwork metabolicNetwork){
-        loadMetabolites(metabolicNetwork);
-        loadReactions(metabolicNetwork);
+    public MetabolicNetworkDTO(MetabolicNetwork mn){
+        loadMetabolites(mn);
+        loadReactions(mn);
     }
 
     private void loadReactions(MetabolicNetwork mn){
         Collection<Transition<Reaction>> transitions = mn.getTransitions().values();
-        for(Transition<Reaction> t: transitions){
-            ReactionDTO r = new ReactionDTO(t.getObject());
-            this.reactions.add(r);
-
-            List<Edge<Place>> edgesOut = t.getEdgesOut();
-            for(Edge<Place> ep: edgesOut){
-                r.addEdgeOut(ep.getTarget().getID());
-            }
+        for(Transition<Reaction> transition: transitions){
+            ReactionDTO reaction = new ReactionDTO(transition.getObject());
+            this.reactions.add(reaction);
+            addEdgesToReaction(reaction,transition);
         }
+    }
+
+    private void addEdgesToReaction(ReactionDTO r, Transition<Reaction> t){
+        List<Edge<Place>> edgesOut = t.getEdgesOut();
+        r.addEdgesOut(edgesOut);
+
+        List<Edge<Place>> edgesIn = t.getEdgesIn();
+        r.addEdgesIn(edgesIn);
     }
 
     private void loadMetabolites(MetabolicNetwork mn){
@@ -46,12 +50,15 @@ public class MetabolicNetworkDTO {
        for(Place<Metabolite> place: places){
            MetaboliteDTO mdto = new MetaboliteDTO(place.getObject());
            this.metabolites.add(mdto);
-
-           List<Edge<Transition>> edgesOut = place.getEdgesOut();
-           for (Edge<Transition> edge: edgesOut){
-               Transition<Reaction> reaction = edge.getTarget();
-               mdto.addEdgeOut(reaction.getID());
-           }
+           addEdgesToMetabolite(mdto, place);
        }
+    }
+
+    private void addEdgesToMetabolite(MetaboliteDTO mdto, Place<Metabolite> place){
+        List<Edge<Transition>> edgesOut = place.getEdgesOut();
+        mdto.addEdgesOut(edgesOut);
+
+        List<Edge<Transition>> edgesIn = place.getEdgesIn();
+        mdto.addEdgesIn(edgesIn);
     }
 }
