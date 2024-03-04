@@ -14,7 +14,7 @@ public class BIGGClient {
     public InputStream downloadModel(String model) {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<byte[]> responseEntity = restTemplate.execute(
-                "http://bigg.ucsd.edu/static/models/e_coli_core.xml",
+                buildURL(model),
                 org.springframework.http.HttpMethod.GET,
                 null,
                 restTemplate.responseEntityExtractor(byte[].class)

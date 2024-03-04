@@ -9,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ReactionComponentDTO {
 
-    private MetaboliteDTO metabolite;
+    private String metaboliteID;
 
     private double stoichiometry;
 
