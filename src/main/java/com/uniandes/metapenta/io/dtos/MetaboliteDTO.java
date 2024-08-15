@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import metapenta.model.metabolic.network.Metabolite;
+import metapenta.model.Metabolite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class MetaboliteDTO {
     private List<String> edgesOut = new ArrayList<>();
 
     public MetaboliteDTO(Metabolite metabolite){
-        this.compartment = metabolite.getCompartment();
+        this.compartment = metabolite.getCompartmentId();
         this.name = metabolite.getName();
         this.id = metabolite.getId();
     }

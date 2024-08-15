@@ -21,20 +21,20 @@ public class MetapentaController {
     @Autowired
     private MetaPentaService service;
 
-    // @GetMapping("/{model}")
-    // public MetabolicNetworkDTO getModel(@PathVariable String model) throws Exception {
-    //     return service.loadModel(model);
-    // }
-
-    @PostMapping("/upload")
-    public ResponseEntity<MetabolicNetworkDTO> uploadFile(@RequestParam("file") MultipartFile file) {
-        try {
-            MetabolicNetworkDTO networkDTO = service.processUploadedFile(file);
-            return ResponseEntity.ok(networkDTO);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+    @GetMapping("/{model}")
+    public MetabolicNetworkDTO getModel(@PathVariable String model) throws Exception {
+        return service.loadModel(model);
     }
+
+    // @PostMapping("/upload")
+    // public ResponseEntity<MetabolicNetworkDTO> uploadFile(@RequestParam("file") MultipartFile file) {
+    //     try {
+    //         MetabolicNetworkDTO networkDTO = service.processUploadedFile(file);
+    //         return ResponseEntity.ok(networkDTO);
+    //     } catch (Exception e) {
+    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    //     }
+    // }
 
     
     
