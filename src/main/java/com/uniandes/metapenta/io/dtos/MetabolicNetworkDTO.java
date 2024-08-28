@@ -1,18 +1,17 @@
 package com.uniandes.metapenta.io.dtos;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import metapenta.model.MetabolicNetwork;
 import metapenta.model.Metabolite;
 import metapenta.model.Reaction;
-import metapenta.model.MetabolicNetwork;
-import metapenta.model.petrinet.Edge;
-import metapenta.model.petrinet.Place;
-import metapenta.model.petrinet.Transition;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import metapenta.model.ReactionComponent;
 
 @Getter
 @Setter
@@ -20,38 +19,45 @@ import java.util.List;
 public class MetabolicNetworkDTO {
 
     private List<ReactionDTO> reactions = new ArrayList<>();
-
     private List<MetaboliteDTO> metabolites = new ArrayList<>();
+    private Map<String, MetaboliteDTO> metaboliteMap = new HashMap<>();
 
     public MetabolicNetworkDTO(MetabolicNetwork metabolicNetwork){
         loadMetabolites(metabolicNetwork);
         loadReactions(metabolicNetwork);
     }
 
-    private void loadReactions(MetabolicNetwork mn){
-        Collection<Transition<Reaction>> transitions = mn.getTransitions().values();
-        for(Transition<Reaction> t: transitions){
-            ReactionDTO r = new ReactionDTO(t.getObject());
-            this.reactions.add(r);
-
-            List<Edge<Place>> edgesOut = t.getEdgesOut();
-            for(Edge<Place> ep: edgesOut){
-                r.addEdgeOut(ep.getTarget().getID());
-            }
+    private void loadMetabolites(MetabolicNetwork mn) {
+        for (Metabolite metabolite : mn.getMetabolitesAsList()) {
+            MetaboliteDTO mdto = new MetaboliteDTO(metabolite);
+            this.metabolites.add(mdto);
+            this.metaboliteMap.put(metabolite.getId(), mdto);
         }
     }
 
-    private void loadMetabolites(MetabolicNetwork mn){
-       Collection<Place<Metabolite>> places = mn.getPlaces().values();
-       for(Place<Metabolite> place: places){
-           MetaboliteDTO mdto = new MetaboliteDTO(place.getObject());
-           this.metabolites.add(mdto);
+    private void loadReactions(MetabolicNetwork mn){
+        List<Reaction> reactions = mn.getReactionsAsList();
+        for(Reaction r:reactions){
+            ReactionDTO rd = new ReactionDTO(r);
+            this.reactions.add(rd);
+            //Load all edges from here. search the metabolitedto object and add edge out to this reaction name
+            // Load edges from reactants
+            List<ReactionComponent> reactants = r.getReactants();
+            for (ReactionComponent rc : reactants) {
+                MetaboliteDTO metaboliteDTO = metaboliteMap.get(rc.getMetaboliteId());
+                if (metaboliteDTO != null) {
+                    metaboliteDTO.addEdgeOut(r.getId());
+                }
+            }
 
-           List<Edge<Transition>> edgesOut = place.getEdgesOut();
-           for (Edge<Transition> edge: edgesOut){
-               Transition<Reaction> reaction = edge.getTarget();
-               mdto.addEdgeOut(reaction.getID());
-           }
-       }
+
+            List<ReactionComponent> products =  r.getProducts();
+            for(ReactionComponent rc:products){
+                rd.addEdgeOut(rc.getMetaboliteId());
+            }
+
+        }
     }
+
+    
 }

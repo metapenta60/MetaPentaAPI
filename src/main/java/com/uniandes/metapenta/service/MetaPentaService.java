@@ -1,14 +1,15 @@
 package com.uniandes.metapenta.service;
 
-import com.uniandes.metapenta.io.BIGGClient;
-import com.uniandes.metapenta.io.dtos.MetabolicNetworkDTO;
-import metapenta.services.MetabolicNetworkService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.io.FileInputStream;
 import java.io.InputStream;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.uniandes.metapenta.io.BIGGClient;
+import com.uniandes.metapenta.io.dtos.MetabolicNetworkDTO;
+
+import metapenta.services.MetabolicNetworkService;
 
 @Service
 public class MetaPentaService {
@@ -18,7 +19,7 @@ public class MetaPentaService {
 
 
     public MetabolicNetworkDTO loadModel(String model) throws Exception {
-        InputStream is = new FileInputStream("/Users/pabluchenko/2024_1/jorge/MetaPentaAPI/src/main/java/com/uniandes/metapenta/service/e_coli_core.xml");
+        InputStream is = new FileInputStream("/home/pabluchenko/2024_2/tesis/MetaPentaAPI/src/main/java/examples/e_coli_core.xml");
         MetabolicNetworkService ms = new MetabolicNetworkService(is);
 
         return new MetabolicNetworkDTO(ms.getNetwork());

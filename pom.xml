@@ -43,10 +43,11 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-  <groupId>uniandes.flag.metapenta.edu.co</groupId>
-  <artifactId>metapentacore</artifactId>
-  <version>1.0.6-SNAPSHOT</version>
-</dependency>
+			<groupId>uniandes.flag.metapenta.edu.co</groupId>
+			<artifactId>metapentacore</artifactId>
+			<version>1.0.6-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
