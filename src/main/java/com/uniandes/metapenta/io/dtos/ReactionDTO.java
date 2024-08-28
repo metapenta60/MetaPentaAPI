@@ -2,8 +2,8 @@ package com.uniandes.metapenta.io.dtos;
 
 import lombok.Getter;
 import lombok.Setter;
-import metapenta.model.metabolic.network.Reaction;
-import metapenta.model.metabolic.network.ReactionComponent;
+import metapenta.model.Reaction;
+import metapenta.model.ReactionComponent;
 import java.util.ArrayList;
 import java.util.List;
 
