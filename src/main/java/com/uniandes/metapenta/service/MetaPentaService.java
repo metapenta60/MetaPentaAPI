@@ -20,7 +20,7 @@ public class MetaPentaService {
 
 
     public MetabolicNetworkDTO loadModel(String model) throws Exception {
-        InputStream is = new FileInputStream("/Users/pabluchenko/2024_1/Jorge/MetaPentaAPI/src/main/java/com/uniandes/metapenta/service/e_coli_core.xml");
+        InputStream is = new FileInputStream("/home/pabluchenko/2024_2/tesis/MetaPentaAPI/src/main/java/com/uniandes/metapenta/service/e_coli_core.xml");
         MetabolicNetworkService ms = new MetabolicNetworkService(is);
 
         return new MetabolicNetworkDTO(ms.getNetwork());
