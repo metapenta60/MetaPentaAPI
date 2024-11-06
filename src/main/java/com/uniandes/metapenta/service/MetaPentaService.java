@@ -1,6 +1,5 @@
 package com.uniandes.metapenta.service;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
 
@@ -8,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.uniandes.metapenta.io.BIGGClient;
 import com.uniandes.metapenta.io.dtos.CustomShortestPathsDTO;
 import com.uniandes.metapenta.io.dtos.MetabolicNetworkDTO;
 
@@ -31,7 +29,14 @@ public class MetaPentaService {
         }
     }
 
-    // Get metabolite reactions from the uploaded file
+    // New method to download a model from BiGG, process it, and return the result
+    public MetabolicNetworkDTO downloadAndProcessModel(String modelId, String format) throws Exception {
+        try (InputStream modelStream = client.downloadModel(modelId, format)) {
+            MetabolicNetworkService ms = new MetabolicNetworkService(modelStream);
+            return new MetabolicNetworkDTO(ms.getNetwork());
+        }
+    }
+
     public MetaboliteReactionsDTO getMetaboliteReactions(MultipartFile file, String metaboliteId) throws Exception {
         try (InputStream is = file.getInputStream()) {
             MetabolicNetworkService ms = new MetabolicNetworkService(is);

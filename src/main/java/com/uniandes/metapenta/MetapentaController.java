@@ -19,7 +19,6 @@ import com.uniandes.metapenta.service.MetaPentaService;
 
 import metapenta.services.dto.MetaboliteReactionsDTO;
 import metapenta.services.dto.PathsDTO;
-import metapenta.services.dto.ShortestPathsDTO;
 
 
 @RestController
@@ -32,6 +31,19 @@ public class MetapentaController {
     public ResponseEntity<MetabolicNetworkDTO> processFile(@RequestParam("file") MultipartFile file) {
         try {
             MetabolicNetworkDTO networkDTO = service.uploadFile(file);
+            return ResponseEntity.ok(networkDTO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    // New endpoint to download a model from BiGG, process it, and return JSON
+    @GetMapping("/models/{modelId}/process")
+    public ResponseEntity<MetabolicNetworkDTO> downloadAndProcessModel(@PathVariable String modelId) {
+        String format = "xml"; 
+        try {
+            MetabolicNetworkDTO networkDTO = service.downloadAndProcessModel(modelId, format);
             return ResponseEntity.ok(networkDTO);
         } catch (Exception e) {
             e.printStackTrace();

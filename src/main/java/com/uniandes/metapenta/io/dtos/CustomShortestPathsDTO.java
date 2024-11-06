@@ -3,11 +3,6 @@ package com.uniandes.metapenta.io.dtos;
 import java.util.HashMap;
 import java.util.Map;
 
-import metapenta.model.Metabolite;
-import metapenta.model.petrinet.Place;
-import metapenta.model.petrinet.Transition;
-import metapenta.services.dto.ShortestPathsDTO;
-
 public class CustomShortestPathsDTO {
 
     private Map<String, String[]> paths = new HashMap<>();
