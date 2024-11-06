@@ -1,13 +1,13 @@
 package com.uniandes.metapenta.io.dtos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import metapenta.model.Metabolite;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter

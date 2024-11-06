@@ -40,8 +40,7 @@ public class MetabolicNetworkDTO {
         for(Reaction r:reactions){
             ReactionDTO rd = new ReactionDTO(r);
             this.reactions.add(rd);
-            //Load all edges from here. search the metabolitedto object and add edge out to this reaction name
-            // Load edges from reactants
+            
             List<ReactionComponent> reactants = r.getReactants();
             for (ReactionComponent rc : reactants) {
                 MetaboliteDTO metaboliteDTO = metaboliteMap.get(rc.getMetaboliteId());
@@ -49,7 +48,6 @@ public class MetabolicNetworkDTO {
                     metaboliteDTO.addEdgeOut(r.getId());
                 }
             }
-
 
             List<ReactionComponent> products =  r.getProducts();
             for(ReactionComponent rc:products){

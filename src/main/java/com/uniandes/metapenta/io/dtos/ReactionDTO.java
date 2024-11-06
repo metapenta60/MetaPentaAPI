@@ -1,11 +1,13 @@
+
 package com.uniandes.metapenta.io.dtos;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
 import metapenta.model.Reaction;
 import metapenta.model.ReactionComponent;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
