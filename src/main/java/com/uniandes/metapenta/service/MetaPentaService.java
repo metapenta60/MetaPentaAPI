@@ -1,5 +1,7 @@
 package com.uniandes.metapenta.service;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.List;
 
@@ -10,7 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.uniandes.metapenta.io.dtos.CustomShortestPathsDTO;
 import com.uniandes.metapenta.io.dtos.MetabolicNetworkDTO;
 
+import metapenta.model.MetabolicNetwork;
 import metapenta.services.MetabolicNetworkService;
+import metapenta.services.ShortestPathService;
 import metapenta.services.dto.MetaboliteReactionsDTO;
 import metapenta.services.dto.PathsDTO;
 import metapenta.services.dto.ShortestPathsDTO;
@@ -29,7 +33,6 @@ public class MetaPentaService {
         }
     }
 
-    // New method to download a model from BiGG, process it, and return the result
     public MetabolicNetworkDTO downloadAndProcessModel(String modelId, String format) throws Exception {
         try (InputStream modelStream = client.downloadModel(modelId, format)) {
             MetabolicNetworkService ms = new MetabolicNetworkService(modelStream);
@@ -44,12 +47,27 @@ public class MetaPentaService {
         }
     }
 
-    public CustomShortestPathsDTO getShortestPaths(MultipartFile file, String metaboliteId) throws Exception {
-        try (InputStream is = file.getInputStream()) {
-            MetabolicNetworkService ms = new MetabolicNetworkService(is);
-            ShortestPathsDTO shortestPaths = ms.getShortestPaths(metaboliteId);
-
-            return new CustomShortestPathsDTO(shortestPaths.getPaths());
+    public CustomShortestPathsDTO getShortestPaths(MultipartFile file, String originId, String destinationId) throws Exception {
+        File tempFile = File.createTempFile("metabolic_network", ".xml");
+        try (FileOutputStream fos = new FileOutputStream(tempFile)) {
+            fos.write(file.getBytes());
+        }
+    
+        try {
+            MetabolicNetwork metabolicNetwork = MetabolicNetwork.load(tempFile.getAbsolutePath());
+    
+            ShortestPathService shortestPathService = new ShortestPathService();
+            shortestPathService.setMetabolicNetwork(metabolicNetwork);
+    
+            ShortestPathsDTO shortestPaths = shortestPathService.getShortestPath(originId, destinationId);
+    
+            return new CustomShortestPathsDTO(
+                shortestPaths.getOriginId(),
+                shortestPaths.getDestinationId(),
+                shortestPaths.getPath()
+            );
+        } finally {
+            tempFile.delete();
         }
     }
 

@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "a6971220-83bb-4323-949f-31092a16f44a",
+		"name": "MetaPenta",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23134210"
+	},
+	"item": [
+		{
+			"name": "UploadXML",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/pabluchenko/Downloads/e_coli_core (1).xml"
+						},
+						{
+							"key": "file",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/upload",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "shortest-path",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/home/pabluchenko/Documents/e_coli_core.xml"
+						},
+						{
+							"key": "originId",
+							"value": "M_amp_c",
+							"type": "text"
+						},
+						{
+							"key": "destinationId",
+							"value": "M_adp_c",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/metabolite/shortest-path",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"metabolite",
+						"shortest-path"
+					],
+					"query": [
+						{
+							"key": "file",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBIGGModels",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/pabluchenko/Downloads/e_coli_core (1).xml"
+						},
+						{
+							"key": "file",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/bigg/models",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bigg",
+						"models"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "downloadBIGGModel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/bigg/models/iAB_RBC_283/download",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bigg",
+						"models",
+						"iAB_RBC_283",
+						"download"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "processBIGGModelWithCore",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/bigg/models/iAB_RBC_283/download",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bigg",
+						"models",
+						"iAB_RBC_283",
+						"download"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

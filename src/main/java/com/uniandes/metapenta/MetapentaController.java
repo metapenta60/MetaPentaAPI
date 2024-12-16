@@ -38,7 +38,6 @@ public class MetapentaController {
         }
     }
 
-    // New endpoint to download a model from BiGG, process it, and return JSON
     @GetMapping("/models/{modelId}/process")
     public ResponseEntity<MetabolicNetworkDTO> downloadAndProcessModel(@PathVariable String modelId) {
         String format = "xml"; 
@@ -63,11 +62,13 @@ public class MetapentaController {
         }
     }
 
-    @PostMapping("/metabolite/{metaboliteId}/shortest-path")
-    public ResponseEntity<CustomShortestPathsDTO> getShortestPaths(@RequestParam("file") MultipartFile file,
-                                                             @PathVariable String metaboliteId) {
+    @PostMapping("/metabolite/shortest-path")
+    public ResponseEntity<CustomShortestPathsDTO> getShortestPaths(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam String originId,
+            @RequestParam String destinationId) {
         try {
-            CustomShortestPathsDTO shortestPaths = service.getShortestPaths(file, metaboliteId);
+            CustomShortestPathsDTO shortestPaths = service.getShortestPaths(file, originId, destinationId);
             return ResponseEntity.ok(shortestPaths);
         } catch (Exception e) {
             e.printStackTrace();

@@ -23,20 +23,17 @@ public class BIGGController {
     @Autowired
     private BIGGClient biggClient;
     
-    // Endpoint to list all available models
     @GetMapping("/models")
     public List<Model> listModels() {
         return biggClient.getModelsList();
     }
 
-    // Endpoint to download a selected model in a specific format
     @GetMapping("/models/{modelId}/download")
     public ResponseEntity<InputStreamResource> downloadModel(@PathVariable String modelId) {
 
         String format="xml";
         InputStream modelStream = biggClient.downloadModel(modelId, format);
 
-        // Set headers for file download
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + modelId + "." + format);
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);

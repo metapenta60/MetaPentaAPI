@@ -21,14 +21,13 @@ public class BIGGClient {
     private static final String MODEL_DOWNLOAD_URL = "http://bigg.ucsd.edu/static/models/";
 
     @Autowired
-    @Qualifier("customRestTemplate")  // Specify the custom bean name if needed
+    @Qualifier("customRestTemplate") 
     private final RestTemplate restTemplate;
 
     public BIGGClient(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
-    // Fetch the list of available models
     public List<Model> getModelsList() {
         ResponseEntity<ModelListResponse> response = restTemplate.getForEntity(MODEL_LIST_ENDPOINT, ModelListResponse.class);
         if (response.getStatusCode().is2xxSuccessful()) {
@@ -38,7 +37,6 @@ public class BIGGClient {
         }
     }
 
-    // Download a selected model in a specified format (e.g., xml, json, mat)
     public InputStream downloadModel(String modelId, String format) {
         String url = MODEL_DOWNLOAD_URL + modelId + "." + format;
         ResponseEntity<byte[]> responseEntity = restTemplate.getForEntity(url, byte[].class);

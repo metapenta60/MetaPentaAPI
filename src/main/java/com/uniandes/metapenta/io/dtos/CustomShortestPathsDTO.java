@@ -1,27 +1,42 @@
 package com.uniandes.metapenta.io.dtos;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class CustomShortestPathsDTO {
 
-    private Map<String, String[]> paths = new HashMap<>();
+    private String originId;
+    private String destinationId;
+    private List<String> path;
 
-    // Constructor to map data from ShortestPathsDTO
-    public CustomShortestPathsDTO(Map<String, String[]> originalPaths) {
-        this.paths = originalPaths;
+    // Constructor
+    public CustomShortestPathsDTO(String originId, String destinationId, List<String> path) {
+        this.originId = originId;
+        this.destinationId = destinationId;
+        this.path = path;
     }
 
-    public Map<String, String[]> getPaths() {
-        return paths;
+    // Getters and setters
+    public String getOriginId() {
+        return originId;
     }
 
-    public void setPaths(Map<String, String[]> paths) {
-        this.paths = paths;
+    public void setOriginId(String originId) {
+        this.originId = originId;
     }
 
-    public void addPath(String metaboliteId, String[] path) {
-        this.paths.put(metaboliteId, path);
+    public String getDestinationId() {
+        return destinationId;
     }
 
+    public void setDestinationId(String destinationId) {
+        this.destinationId = destinationId;
+    }
+
+    public List<String> getPath() {
+        return path;
+    }
+
+    public void setPath(List<String> path) {
+        this.path = path;
+    }
 }

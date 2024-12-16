@@ -17,5 +17,4 @@ public class Model {
     @JsonProperty("gene_count")
     private int geneCount;
 
-    // Getters and Setters
 }
